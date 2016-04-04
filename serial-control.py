@@ -246,6 +246,12 @@ def loop_all_profiles(num_profiles=6):
 
 			log.process_log(logline)
 
+def print_feedback():
+	with get_tty() as port:
+		while True:
+			logline = port.readline().strip()
+			print logline
+
 def logging_only():
 	log = Log()
 
@@ -259,9 +265,11 @@ if __name__ == '__main__':
 	if action == 'log':
 		print 'Logging reflow sessions...'
 		logging_only()
-
 	elif action == 'test':
 		print 'Looping over all profiles'
 		loop_all_profiles()
+	elif action == 'console':
+		print 'Print all feedback only to console'
+		print_feedback()
 	else:
 		print 'Unknown action', action
